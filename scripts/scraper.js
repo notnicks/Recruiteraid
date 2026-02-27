@@ -11,11 +11,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 dotenv.config({ path: join(__dirname, '..', '.env') });
 
-// Initialize Firebase Admin (requires FIREBASE_SERVICE_ACCOUNT base64 in env, or local default args)
+// Initialize Firebase Admin (requires FIREBASE_SERVICE_ACCOUNT JSON string in env, or local default args)
 if (!admin.apps.length) {
     try {
         if (process.env.FIREBASE_SERVICE_ACCOUNT_RECRUITERAID) {
-            const serviceAccount = JSON.parse(Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_RECRUITERAID, 'base64').toString('utf-8'));
+            const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_RECRUITERAID);
             admin.initializeApp({
                 credential: admin.credential.cert(serviceAccount)
             });
