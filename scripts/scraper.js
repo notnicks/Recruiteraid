@@ -14,8 +14,8 @@ dotenv.config({ path: join(__dirname, '..', '.env') });
 // Initialize Firebase Admin (requires FIREBASE_SERVICE_ACCOUNT base64 in env, or local default args)
 if (!admin.apps.length) {
     try {
-        if (process.env.FIREBASE_SERVICE_ACCOUNT_RECRUITERAID_METRICS) {
-            const serviceAccount = JSON.parse(Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_RECRUITERAID_METRICS, 'base64').toString('utf-8'));
+        if (process.env.FIREBASE_SERVICE_ACCOUNT_RECRUITERAID) {
+            const serviceAccount = JSON.parse(Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_RECRUITERAID, 'base64').toString('utf-8'));
             admin.initializeApp({
                 credential: admin.credential.cert(serviceAccount)
             });
@@ -24,7 +24,7 @@ if (!admin.apps.length) {
             admin.initializeApp();
         }
     } catch (e) {
-        console.warn('Could not initialize Firebase Admin via process.env.FIREBASE_SERVICE_ACCOUNT_RECRUITERAID_METRICS. Fallback to application default credentials.');
+        console.warn('Could not initialize Firebase Admin via process.env.FIREBASE_SERVICE_ACCOUNT_RECRUITERAID. Fallback to application default credentials.');
         admin.initializeApp();
     }
 }
