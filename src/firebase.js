@@ -4,7 +4,7 @@ import { getFirestore } from 'firebase/firestore';
 // Your web app's Firebase configuration
 // (Auto-populated by Firebase Hosting implicitly, but we need it local for dev)
 const firebaseConfig = {
-    projectId: "recruiteraid-metrics",
+    projectId: "recruiteraid",
 };
 
 // Initialize Firebase
