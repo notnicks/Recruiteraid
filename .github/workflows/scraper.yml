@@ -1,0 +1,24 @@
+name: Daily Metrics Scraper
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # 2 AM daily
+  workflow_dispatch: # allow manual trigger
+
+jobs:
+  scrape_and_store:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run Scraper
+        env:
+          ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
+          FIREBASE_SERVICE_ACCOUNT_RECRUITERAID_METRICS: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_RECRUITERAID_METRICS }}
+        run: node scripts/scraper.js
